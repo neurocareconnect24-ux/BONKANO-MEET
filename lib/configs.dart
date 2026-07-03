@@ -1,0 +1,58 @@
+// ignore_for_file: constant_identifier_names
+
+import 'package:flutter/foundation.dart';
+
+const APP_NAME = 'Bonkano Meet';
+const APP_LOGO_URL = '$DOMAIN_URL/img/logo/mini_logo.png';
+const DEFAULT_LANGUAGE = 'fr';
+
+///Live Url
+const DOMAIN_URL = "https://pro.neurocareconnect.tech";
+
+const BASE_URL = '$DOMAIN_URL/api/';
+
+const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.neurocare.connect';
+const APP_APPSTORE_URL = '';
+
+const TERMS_CONDITION_URL = '$DOMAIN_URL/page/terms-conditions';
+const PRIVACY_POLICY_URL = '$DOMAIN_URL/page/privacy-policy';
+// TODO: Remplacer par l'email de support réel de Bonkano Meet
+const INQUIRY_SUPPORT_EMAIL = 'support@neurocareconnect.tech';
+
+// TODO: Remplacer par le numéro d'aide réel de Bonkano Meet
+const HELP_LINE_NUMBER = '+22901000000';
+
+//region Payment Gateway
+//region STRIPE
+const STRIPE_URL = 'https://api.stripe.com/v1/payment_intents';
+const STRIPE_merchantIdentifier = "merchant.flutter.stripe.test";
+const STRIPE_CURRENCY_CODE = 'INR';
+//endregion
+
+/// PAYSTACK
+const String payStackCurrency = "NGN";
+
+/// PAYPAl
+const String payPalSupportedCurrency = 'USD';
+
+/// Airtel Money Payments
+///It Supports ["UGX", "NGN", "TZS", "KES", "RWF", "ZMW", "CFA", "XOF", "XAF", "CDF", "USD", "XAF", "SCR", "MGA", "MWK"]
+const airtel_currency_code = "MWK";
+const airtel_country_code = "MW";
+const AIRTEL_BASE = kDebugMode ? 'https://openapiuat.airtel.africa/' : "https://openapi.airtel.africa";
+
+/// SADAD PAYMENT DETAIL
+const SADAD_API_URL = 'https://api-s.sadad.qa';
+const SADAD_PAY_URL = "https://d.sadad.qa";
+
+//end region
+
+//region FEDAPAY PAYMENT
+// La clé publique FedaPay n'est pas nécessaire côté client.
+// Le paiement est géré via le package feda qui utilise env.json.
+//endregion
+
+//region Agora Video Call
+const AGORA_APP_ID = 'bffd3c50c66f43a0a2db7493e3dddfc6'; // App ID
+// Note: Le certificat Agora est géré côté serveur uniquement pour la génération des tokens.
+//endregion
