@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../../api/core_apis.dart';
 import '../../utils/app_common.dart';
+import '../../utils/constants.dart';
 import '../booking/model/appointments_res_model.dart';
 import 'model/encounter_list_model.dart';
 
@@ -41,8 +42,14 @@ class AllEncountersController extends GetxController {
         perPage: 50,
       );
 
+      // Safety net: only keep appointments actually checked out.
+      // The backend's status=checkout filter has been seen to leak
+      // pending-validation appointments into this "completed" list.
+      List<AppointmentData> checkedOutAppointments =
+          appointments.where((a) => a.status == BookingStatusConst.CHECKOUT).toList();
+
       // Combine and Sort
-      List<dynamic> combined = [...encounters, ...appointments];
+      List<dynamic> combined = [...encounters, ...checkedOutAppointments];
       combined.sort((a, b) {
         DateTime dateA = _getDateTime(a);
         DateTime dateB = _getDateTime(b);
