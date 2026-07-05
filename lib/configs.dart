@@ -14,10 +14,9 @@ const BASE_URL = '$DOMAIN_URL/api/';
 const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.neurocare.connect';
 const APP_APPSTORE_URL = '';
 
-const TERMS_CONDITION_URL = '$DOMAIN_URL/page/terms-conditions';
-const PRIVACY_POLICY_URL = '$DOMAIN_URL/page/privacy-policy';
-// TODO: Remplacer par l'email de support réel de Bonkano Meet
-const INQUIRY_SUPPORT_EMAIL = 'support@neurocareconnect.tech';
+const TERMS_CONDITION_URL = 'https://meet.bonkano.fr/page/terms-conditions';
+const PRIVACY_POLICY_URL = 'https://meet.bonkano.fr/page/privacy-policy';
+const INQUIRY_SUPPORT_EMAIL = 'contact@bonkano.fr';
 
 // TODO: Remplacer par le numéro d'aide réel de Bonkano Meet
 const HELP_LINE_NUMBER = '+22901000000';
