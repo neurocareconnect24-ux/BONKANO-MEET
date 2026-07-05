@@ -120,7 +120,7 @@ void main() {
   // ═══════════════════════════════════════════════════════════════════════════
   group('URL security', () {
     test('API base URL uses HTTPS', () {
-      const domainUrl = 'https://pro.neurocareconnect.tech';
+      const domainUrl = 'https://meet.bonkano.fr';
       final uri = Uri.parse(domainUrl);
       expect(uri.scheme, 'https',
           reason: 'All API communications must use HTTPS');

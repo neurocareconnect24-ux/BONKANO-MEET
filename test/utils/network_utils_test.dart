@@ -68,12 +68,12 @@ void main() {
   //  URL Building
   // ═══════════════════════════════════════════════════════════════════════════
   group('URL building', () {
-    const baseUrl = 'https://pro.neurocareconnect.tech';
+    const baseUrl = 'https://meet.bonkano.fr';
 
     test('build API URL with endpoint', () {
       final uri = Uri.parse('$baseUrl/api/user/login');
       expect(uri.scheme, 'https');
-      expect(uri.host, 'pro.neurocareconnect.tech');
+      expect(uri.host, 'meet.bonkano.fr');
       expect(uri.path, '/api/user/login');
     });
 
