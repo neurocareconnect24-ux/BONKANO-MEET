@@ -12,8 +12,10 @@ import '../../utils/colors.dart';
 import '../../utils/common_base.dart';
 import '../../utils/empty_error_state_widget.dart';
 import '../../utils/view_all_label_component.dart';
+import 'appointment_detail_screen.dart';
 import 'encounter_detail_controller.dart';
 import 'model/appointment_detail_res.dart';
+import 'model/appointments_res_model.dart';
 import 'model/encounter_detail_model.dart';
 import '../chat/chat_screen.dart';
 
@@ -145,7 +147,25 @@ class EncounterDetailScreen extends StatelessWidget {
                               ).expand(),
                             ],
                           ),
-                        ]
+                        ],
+                        if (encounterDetailCont.encounterDetail.value.appointmentId > 0) ...[
+                          commonDivider.paddingSymmetric(vertical: 16),
+                          InkWell(
+                            onTap: () {
+                              Get.to(
+                                () => AppointmentDetail(),
+                                arguments: AppointmentData(id: encounterDetailCont.encounterDetail.value.appointmentId),
+                              );
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(locale.value.appointment, style: primaryTextStyle()),
+                                Icon(Icons.arrow_forward_ios_rounded, size: 12, color: appColorPrimary),
+                              ],
+                            ),
+                          ),
+                        ],
                       ],
                     ),
                   ).paddingSymmetric(horizontal: 16),

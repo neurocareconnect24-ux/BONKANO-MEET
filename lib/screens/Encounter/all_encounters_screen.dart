@@ -9,9 +9,6 @@ import '../../utils/empty_error_state_widget.dart';
 import '../booking/encounter_detail_screen.dart';
 import 'all_encounters_controller.dart';
 import 'components/all_encounters_card.dart';
-import '../booking/components/appointment_card.dart';
-import '../booking/model/appointments_res_model.dart';
-import 'model/encounter_list_model.dart';
 
 class AllEncountersScreen extends StatelessWidget {
   AllEncountersScreen({super.key});
@@ -76,20 +73,12 @@ class AllEncountersScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       var item = allEncountersCont.combinedList[index];
 
-                      if (item is EncounterElement) {
-                        return InkWell(
-                          onTap: () {
-                            Get.to(() => EncounterDetailScreen(), arguments: item.id);
-                          },
-                          child: AllEncountersCard(encounterElement: item).paddingBottom(16),
-                        );
-                      } else if (item is AppointmentData) {
-                        return AppointmentCard(
-                          appointment: item,
-                        ).paddingBottom(16);
-                      }
-
-                      return const SizedBox();
+                      return InkWell(
+                        onTap: () {
+                          Get.to(() => EncounterDetailScreen(), arguments: item.id);
+                        },
+                        child: AllEncountersCard(encounterElement: item).paddingBottom(16),
+                      );
                     },
                   );
                 },

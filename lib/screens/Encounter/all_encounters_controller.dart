@@ -3,12 +3,10 @@ import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../../api/core_apis.dart';
 import '../../utils/app_common.dart';
-import '../../utils/constants.dart';
-import '../booking/model/appointments_res_model.dart';
 import 'model/encounter_list_model.dart';
 
 class AllEncountersController extends GetxController {
-  RxList<dynamic> combinedList = RxList();
+  RxList<EncounterElement> combinedList = RxList();
   RxBool isLoading = false.obs;
   RxBool isLastPage = false.obs;
   RxInt page = 1.obs;
@@ -24,7 +22,10 @@ class AllEncountersController extends GetxController {
       isLoading(true);
     }
     try {
-      // Fetch Encounters
+      // "Actes Médicaux" are real medical records (patient_encounters), not
+      // appointments — an appointment being checked out doesn't mean a
+      // medical record exists for it. Only the encounters endpoint should
+      // ever feed this screen.
       List<EncounterElement> encounters = [];
       await CoreServiceApis.getEncounterList(
         page: page.value,
@@ -33,54 +34,20 @@ class AllEncountersController extends GetxController {
         perPage: 50,
       );
 
-      // Fetch Completed Appointments (Consultations)
-      List<AppointmentData> appointments = [];
-      await CoreServiceApis.getAppointmentList(
-        page: page.value,
-        appointments: appointments,
-        filterByStatus: 'completed', // We only want history in Actes Médicaux
-        perPage: 50,
-      );
-
-      // Safety net: only keep appointments actually checked out AND whose
-      // date has passed. The backend has been seen to mark appointments as
-      // "checkout" even when scheduled in the future (data inconsistency),
-      // which would otherwise show an unstarted consultation as a medical
-      // record here.
-      final now = DateTime.now();
-      List<AppointmentData> checkedOutAppointments = appointments.where((a) {
-        if (a.status != BookingStatusConst.CHECKOUT) return false;
-        final appointmentDate = DateTime.tryParse(a.appointmentDate);
-        return appointmentDate == null || !appointmentDate.isAfter(now);
-      }).toList();
-
-      // Combine and Sort
-      List<dynamic> combined = [...encounters, ...checkedOutAppointments];
-      combined.sort((a, b) {
-        DateTime dateA = _getDateTime(a);
-        DateTime dateB = _getDateTime(b);
+      encounters.sort((a, b) {
+        DateTime dateA = DateTime.tryParse(a.encounterDate) ?? DateTime(1900);
+        DateTime dateB = DateTime.tryParse(b.encounterDate) ?? DateTime(1900);
         return dateB.compareTo(dateA);
       });
 
       if (page.value == 1) combinedList.clear();
-      combinedList.addAll(combined);
-      
-      // Simplified pagination check for combined list
-      isLastPage(combined.length < 50); 
-      
+      combinedList.addAll(encounters);
+
+      isLastPage(encounters.length < 50);
     } catch (e) {
       log("getAllEncounters Err : $e");
     } finally {
       isLoading(false);
     }
-  }
-
-  DateTime _getDateTime(dynamic item) {
-    if (item is EncounterElement) {
-      return DateTime.tryParse(item.encounterDate) ?? DateTime(1900);
-    } else if (item is AppointmentData) {
-      return DateTime.tryParse(item.appointmentDate) ?? DateTime(1900);
-    }
-    return DateTime(1900);
   }
 }
