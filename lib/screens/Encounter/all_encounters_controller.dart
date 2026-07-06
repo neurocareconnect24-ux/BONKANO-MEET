@@ -42,11 +42,17 @@ class AllEncountersController extends GetxController {
         perPage: 50,
       );
 
-      // Safety net: only keep appointments actually checked out.
-      // The backend's status=checkout filter has been seen to leak
-      // pending-validation appointments into this "completed" list.
-      List<AppointmentData> checkedOutAppointments =
-          appointments.where((a) => a.status == BookingStatusConst.CHECKOUT).toList();
+      // Safety net: only keep appointments actually checked out AND whose
+      // date has passed. The backend has been seen to mark appointments as
+      // "checkout" even when scheduled in the future (data inconsistency),
+      // which would otherwise show an unstarted consultation as a medical
+      // record here.
+      final now = DateTime.now();
+      List<AppointmentData> checkedOutAppointments = appointments.where((a) {
+        if (a.status != BookingStatusConst.CHECKOUT) return false;
+        final appointmentDate = DateTime.tryParse(a.appointmentDate);
+        return appointmentDate == null || !appointmentDate.isAfter(now);
+      }).toList();
 
       // Combine and Sort
       List<dynamic> combined = [...encounters, ...checkedOutAppointments];
