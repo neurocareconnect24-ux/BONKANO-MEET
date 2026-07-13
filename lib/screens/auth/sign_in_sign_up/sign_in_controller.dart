@@ -131,36 +131,6 @@ class SignInController extends GetxController {
     });
   }
 
-  appleSignIn() async {
-    isLoading(true);
-    await GoogleSignInAuthService.signInWithApple().then((value) async {
-      Map request = {
-        UserKeys.contactNumber: value.mobile,
-        UserKeys.email: value.email,
-        UserKeys.firstName: value.firstName,
-        UserKeys.lastName: value.lastName,
-        UserKeys.username: value.userName,
-        UserKeys.profileImage: value.profileImage,
-        UserKeys.userType: LoginTypeConst.LOGIN_TYPE_USER,
-        UserKeys.loginType: LoginTypeConst.LOGIN_TYPE_APPLE,
-      };
-      log('signInWithGoogle REQUEST: $request');
-
-      /// Social Login Api
-      await AuthServiceApis.loginUser(request: request, isSocialLogin: true).then((value) async {
-        handleLoginResponse(loginResponse: value, isSocialLogin: true);
-      }).catchError((e) {
-        isLoading(false);
-        log('SignIn Error: $e');
-      toast(locale.value.somethingWentWrong, print: true);
-      });
-    }).catchError((e) {
-      isLoading(false);
-      log('SignIn Error: $e');
-      toast(locale.value.somethingWentWrong, print: true);
-    });
-  }
-
   void handleLoginResponse({required UserResponse loginResponse, bool isSocialLogin = false}) {
     if (loginResponse.userData.userRole.contains(LoginTypeConst.LOGIN_TYPE_USER)) {
       loginUserData(loginResponse.userData);

@@ -38,7 +38,6 @@ dependencies:
   firebase_storage: ^12.4.2
 
   # SOCIAL LOGIN
-  the_apple_sign_in: ^1.1.1
   google_sign_in: ^6.3.0
   googleapis: ^14.0.0
   googleapis_auth: ^2.0.0
