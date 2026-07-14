@@ -162,6 +162,25 @@ class SignInScreen extends StatelessWidget {
                                 child: GoogleLogoWidget(size: 24),
                               ),
                             ),
+
+                            GestureDetector(
+                              onTap: () {
+                                signInController.appleSignIn();
+                              },
+                              child: Container(
+                                height: 54,
+                                width: 54,
+                                padding: const EdgeInsets.all(16),
+                                decoration: boxDecorationWithRoundedCorners(
+                                  backgroundColor: bodyWhite.withValues(alpha: 0.1),
+                                  boxShape: BoxShape.circle,
+                                ),
+                                child: Image.asset(
+                                  Assets.imagesAppleLogo,
+                                  color: isDarkMode.value ? null : black,
+                                ).center(),
+                              ).paddingLeft(16).visible(isApple),
+                            ),
                           ],
                         ).paddingLeft(16)
                       ],
