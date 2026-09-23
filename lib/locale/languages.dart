@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
 abstract class BaseLanguage {
+
+  String get medicalDisclaimerTitle;
+  String get medicalDisclaimerShort;
+  String get medicalDisclaimerLong;
+  String get medicalDisclaimerAccept;
+  String get medicalDisclaimerContinue;
+  String get medicalDisclaimerNotEmergency;
+  String get emergencyButton;
   static BaseLanguage of(BuildContext context) => Localizations.of<BaseLanguage>(context, BaseLanguage)!;
 
   String get language;

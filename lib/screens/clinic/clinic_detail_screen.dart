@@ -156,29 +156,12 @@ class ClinicDetailScreen extends StatelessWidget {
                                         Expanded(
                                           child: _buildInfoTile(
                                             context,
-                                            title: clinicDetailCont.clinicData.value.totalAppointment.toString(),
-                                            subtitle: locale.value.totalAppointmentsDone,
-                                            icon: Icons.check_circle_outline,
-                                          ),
-                                        ),
-                                        10.width,
-                                        Expanded(
-                                          child: _buildInfoTile(
-                                            context,
                                             title: clinicDetailCont.clinicData.value.satisfactionPercentage.toString(),
                                             subtitle: locale.value.satisfactionToCustomer,
                                             icon: Icons.emoji_emotions_outlined,
                                           ),
                                         ),
-                                        10.width,
-                                        Expanded(
-                                          child: _buildInfoTile(
-                                            context,
-                                            title: clinicDetailCont.clinicData.value.totalDoctors.toString(),
-                                            subtitle: locale.value.totalVerifiedPatients,
-                                            icon: Icons.verified_user_sharp,
-                                          ),
-                                        )
+                                        
                                       ],
                                     ).paddingSymmetric(vertical: 16),
                                   ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/legal/medical_disclaimer.dart';
 import 'package:get/get.dart';
 import 'package:bonkano_meet/api/auth_apis.dart';
 import 'package:bonkano_meet/main.dart';
@@ -22,6 +23,10 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      MedicalDisclaimer.showDisclaimerIfNeeded(context);
+    });
     return DoublePressBackWidget(
       message: locale.value.pressBackAgainToExitApp,
       child: Scaffold(
@@ -44,7 +49,7 @@ class DashboardScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Row(
+                  child: Obx(() => Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ...List.generate(
@@ -72,8 +77,8 @@ class DashboardScreen extends StatelessWidget {
                         },
                       ),
                     ],
-                  ).fit(),
-                ),
+                  ).fit()),
+                  ),
               ).paddingSymmetric(vertical: 15),
             )
           ],

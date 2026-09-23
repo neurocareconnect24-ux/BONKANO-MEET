@@ -150,8 +150,8 @@ Future handleResponse(Response response, {HttpResponseType httpResponseType = Ht
   }
 
   if (response.statusCode.isSuccessful()) {
-    if (response.body.trim().isJson()) {
-      Map body = jsonDecode(response.body.trim());
+    if (utf8.decode(response.bodyBytes).trim().isJson()) {
+      Map body = jsonDecode(utf8.decode(response.bodyBytes).trim());
 
       if (body.containsKey('status')) {
         if (isFlutterWave.validate()) {
@@ -197,8 +197,8 @@ Future handleResponse(Response response, {HttpResponseType httpResponseType = Ht
   } else if (response.statusCode == 504) {
     throw locale.value.gatewayTimeout;
   } else {
-    if (response.body.trim().isJson()) {
-      Map body = jsonDecode(response.body.trim());
+    if (utf8.decode(response.bodyBytes).trim().isJson()) {
+      Map body = jsonDecode(utf8.decode(response.bodyBytes).trim());
 
       if (body.containsKey('status') && body['status']) {
         return body;

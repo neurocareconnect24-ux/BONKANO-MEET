@@ -1,5 +1,6 @@
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
+import '../../core/legal/medical_disclaimer_banner.dart';
 import 'package:get/get.dart';
 import 'package:bonkano_meet/utils/colors.dart';
 import 'package:nb_utils/nb_utils.dart';

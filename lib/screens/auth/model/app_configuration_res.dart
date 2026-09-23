@@ -125,7 +125,7 @@ class ConfigurationResponse {
       currency: json['currency'] is Map ? Currency.fromJson(json['currency']) : Currency(),
       siteDescription: json['site_description'] is String ? json['site_description'] : "",
       isUserPushNotification: json['is_user_push_notification'] is bool ? json['is_user_push_notification'] : json['is_user_push_notification'] == 1,
-      enableChatGpt: json['enable_chat_gpt'] is bool ? json['enable_chat_gpt'] : json['enable_chat_gpt'] == 1,
+      enableChatGpt: (json['is_chatgpt'] == true || json['is_chatgpt'] == 1 || json['is_chatgpt'] == '1') || (json['enable_chat_gpt'] == true || json['enable_chat_gpt'] == 1 || json['enable_chat_gpt'] == '1'),
       testWithoutKey: json['test_without_key'] is bool ? json['test_without_key'] : json['test_without_key'] == 1,
       chatgptKey: json['chatgpt_key'] is String ? json['chatgpt_key'] : "",
       notification: json['notification'] is String ? json['notification'] : "",

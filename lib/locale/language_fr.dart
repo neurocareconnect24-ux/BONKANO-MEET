@@ -1,6 +1,14 @@
 import 'languages.dart';
 
 class LanguageFr extends BaseLanguage {
+
+  @override String get medicalDisclaimerTitle => 'Avertissement médical';
+  @override String get medicalDisclaimerShort => 'Bonkano ne fournit pas de diagnostic ni de traitement. Consultez toujours un professionnel de santé qualifié.';
+  @override String get medicalDisclaimerLong => 'Bonkano est une plateforme de téléconsultation qui vous met en relation avec des neurologues, psychiatres et neuropédiatres agréés.\n\nL\'application ne fournit pas elle-même de conseil médical, de diagnostic ni de traitement, et ne remplace pas une consultation avec un professionnel de santé. Consultez toujours un professionnel de santé qualifié pour toute question concernant votre état de santé.\n\nEn cas d\'urgence médicale, contactez immédiatement les services d\'urgence (112).';
+  @override String get medicalDisclaimerAccept => 'J\'ai lu et compris';
+  @override String get medicalDisclaimerContinue => 'Continuer';
+  @override String get medicalDisclaimerNotEmergency => 'Bonkano n\'est pas un service d\'urgence.';
+  @override String get emergencyButton => 'Urgence';
   @override
   String get language => 'Langue';
 
@@ -11,7 +19,7 @@ class LanguageFr extends BaseLanguage {
   String get forbidden => '403: interdit';
 
   @override
-  String get pageNotFound => '404 Page non trouvée';
+  String get pageNotFound => '404 Page non trouvéée';
 
   @override
   String get tooManyRequests => '429: Trop de requêtes';
@@ -177,7 +185,7 @@ class LanguageFr extends BaseLanguage {
   String get createYourAccount => 'Créez votre compte';
 
   @override
-  String get createYourAccountFor => 'Créez votre compte pour une meilleure expérience';
+  String get createYourAccountFor => 'Créez votre compte pour une expérience optimale';
 
   @override
   String get signUp => 'S\'inscrire';
@@ -402,7 +410,7 @@ class LanguageFr extends BaseLanguage {
   String get notAMember => "Pas un membre?";
 
   @override
-  String get registerYourAccountForBetterExperience => "Enregistrez votre compte pour une meilleure expérience";
+  String get registerYourAccountForBetterExperience => "Enregistrez votre compte pour une expérience optimale";
 
   @override
   String get termsConditions => "termes et conditions";
@@ -426,7 +434,7 @@ class LanguageFr extends BaseLanguage {
   String get doYouWantToCancelAppointment => "Voulez-vous annuler le rendez-vous?";
 
   @override
-  String get videoCallLinkIsNotFound => "Le lien d'appel vidéo n'est pas trouvé!";
+  String get videoCallLinkIsNotFound => "Le lien d'appel vidéo n'est pas trouvéé!";
 
   @override
   String get thisIsNotAOnlineService => "Ce n'est pas un service en ligne!";
@@ -559,7 +567,7 @@ class LanguageFr extends BaseLanguage {
   String get appointments => "Rendez-vous";
 
   @override
-  String get noAppointmentsFound => "Aucun rendez-vous trouvé";
+  String get noAppointmentsFound => "Aucun rendez-vous trouvéé";
 
   @override
   String get thereAreCurrentlyNoAppointmentsAvailableStart =>
@@ -599,13 +607,13 @@ class LanguageFr extends BaseLanguage {
   String get category => "Catégorie";
 
   @override
-  String get noCategoryFound => "Aucune catégorie trouvée";
+  String get noCategoryFound => "Aucune catégorie trouvéée";
 
   @override
   String get viewDetail => "Voir les détails";
 
   @override
-  String get noServicesFoundAtAMoment => "Aucun service trouvé à un moment";
+  String get noServicesFoundAtAMoment => "Aucun service trouvéé à un moment";
 
   @override
   String get looksLikeThereIsNoServicesForThis => "On dirait qu'il n'y a pas de services pour cela";
@@ -632,7 +640,7 @@ class LanguageFr extends BaseLanguage {
   String get doctors => "Praticiens";
 
   @override
-  String get noSystemServicesFoundAtAMoment => "Aucun service système trouvé à un moment";
+  String get noSystemServicesFoundAtAMoment => "Aucun service système trouvéé à un moment";
 
   @override
   String get looksLikeThereIsNoSystemServicesForThis => "On dirait qu'il n'y a pas de services système pour cela";
@@ -797,7 +805,7 @@ class LanguageFr extends BaseLanguage {
   String get invalidAmount => 'Montant invalide';
 
   @override
-  String get transactionNotFound => 'Transaction introuvable';
+  String get transactionNotFound => 'Transaction introuvéable';
 
   @override
   String get successfullyFetchedEncryptionKey => 'Clé de cryptage récupérée avec succès';
@@ -841,7 +849,7 @@ class LanguageFr extends BaseLanguage {
       "Le bénéficiaire est déjà initié pour désabonnement, interdit ou n'est pas enregistré sur la plateforme Airtel Money";
 
   @override
-  String get theTransactionWasNot => "La transaction n'a pas été trouvée.";
+  String get theTransactionWasNot => "La transaction n'a pas été trouvéée.";
 
   @override
   String get thisIsAGeneric => "Il s'agit d'un refus générique qui a plusieurs causes possibles";
@@ -941,7 +949,7 @@ class LanguageFr extends BaseLanguage {
   String get readLess => "Lire moins";
 
   @override
-  String get noGalleryFoundAtAMoment => "Aucune galerie trouvée à un moment";
+  String get noGalleryFoundAtAMoment => "Aucune galerie trouvéée à un moment";
 
   @override
   String get looksLikeThereIsNoGalleryForThisClinicWellKee =>
@@ -954,7 +962,7 @@ class LanguageFr extends BaseLanguage {
   String get availableClinicsFor => "Cliniques disponibles pour";
 
   @override
-  String get noClinicsFoundAtAMoment => "Aucune clinique trouvée à un moment";
+  String get noClinicsFoundAtAMoment => "Aucune clinique trouvéée à un moment";
 
   @override
   String get looksLikeThereIsNoClinicForThisServiceWellKee =>
@@ -1006,7 +1014,7 @@ class LanguageFr extends BaseLanguage {
   String get university => "Université";
 
   @override
-  String get noQualificationsFound => "Aucune qualification trouvée!";
+  String get noQualificationsFound => "Aucune qualification trouvéée!";
 
   @override
   String get looksLikeThereAreNoQualificationsAddedByThisD => "On dirait qu'il n'y a pas de qualifications ajoutées par ce praticien.";
@@ -1025,14 +1033,14 @@ class LanguageFr extends BaseLanguage {
   String get socialMedia => "Réseaux sociaux";
 
   @override
-  String get noDoctorsFoundAtAMoment => "Pas de praticiens trouvés à un moment";
+  String get noDoctorsFoundAtAMoment => "Pas de praticiens trouvéés à un moment";
 
   @override
   String get looksLikeThereIsNoDoctorsForThisClinicWellKee =>
       "On dirait qu'il n'y a pas de praticiens pour cette clinique, nous vous tiendrons au courant lorsqu'il y aura une mise à jour.";
 
   @override
-  String get noReviewsFoundAtAMoment => "Aucune critique trouvée à un moment";
+  String get noReviewsFoundAtAMoment => "Aucune critique trouvéée à un moment";
 
   @override
   String get looksLikeThereIsNoReviewsWellKeepYouPostedWhe =>
@@ -1045,7 +1053,7 @@ class LanguageFr extends BaseLanguage {
   String get searchDoctorHere => "Praticien de recherche ici";
 
   @override
-  String get noEncountersFound => "Aucun acte médical trouvé!";
+  String get noEncountersFound => "Aucun acte médical trouvéé!";
 
   @override
   String get looksLikeThereIsNoEncountersWellKeepYouPosted =>
@@ -1105,10 +1113,10 @@ class LanguageFr extends BaseLanguage {
   String get walletHistory => "Histoire du portefeuille";
 
   @override
-  String get noWalletDataFound => "Aucune donnée de portefeuille trouvée!";
+  String get noWalletDataFound => "Aucune donnée de portefeuille trouvéée!";
 
   @override
-  String get oppsNoWalletDataFoundAtAMoment => "Opps!Aucune donnée de portefeuille trouvée à un moment.";
+  String get oppsNoWalletDataFoundAtAMoment => "Opps!Aucune donnée de portefeuille trouvéée à un moment.";
 
   @override
   String get walletBalance => "Équilibre du portefeuille";
@@ -1203,7 +1211,7 @@ class LanguageFr extends BaseLanguage {
   String get dobWithColon => 'D-O-B:';
 
   @override
-  String get noPatientsFound => 'Aucun patient trouvé';
+  String get noPatientsFound => 'Aucun patient trouvéé';
 
   @override
   String get editPatient => 'Modifier le patient';
@@ -1426,7 +1434,7 @@ class LanguageFr extends BaseLanguage {
   String get quicklyBookYourAppointmentNow => 'Prenez rapidement votre rendez-vous maintenant';
 
   @override
-  String get noDataFound => 'Aucune donnée trouvée';
+  String get noDataFound => 'Aucune donnée trouvéée';
 
   @override
   String get filterService => 'Service';
@@ -1639,7 +1647,7 @@ class LanguageFr extends BaseLanguage {
   @override
   String get teleconsultationsWillAppearHere => 'Vos téléconsultations apparaîtront ici';
   @override
-  String get noTeleconsultationsFound => 'Aucune téléconsultation trouvée';
+  String get noTeleconsultationsFound => 'Aucune téléconsultation trouvéée';
   @override
   String get joinVideoCall => 'Rejoindre la consultation vidéo';
   @override

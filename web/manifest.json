@@ -1,6 +1,6 @@
 {
-    "name": "Bonkano Meet",
-    "short_name": "Bonkano Meet",
+    "name": "Bonkano",
+    "short_name": "Bonkano",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

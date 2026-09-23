@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// Bonkano Meet - teal/blue-green identity (professional & medical)
+// Bonkano - teal/blue-green identity (professional & medical)
 const appColorPrimary = Color(0xFF2E7D6F);       // Teal foncé - professionnel médical
 const appColorSecondary = Color(0xFF4CAF93);     // Teal clair
 const lightPrimaryColor = Color(0xFFE0F2EE);     // Teal très léger

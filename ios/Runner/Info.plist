@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Bonkano Meet</string>
+	<string>Bonkano</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -15,7 +15,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Bonkano Meet</string>
+	<string>Bonkano</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -67,18 +67,18 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSCameraUsageDescription</key>
-	<string>Bonkano Meet requires access to the Camera for video consultations and profile photo upload.</string>
+	<string>Bonkano requires access to the Camera for video consultations and profile photo upload.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Bonkano Meet requires access to the Microphone for video consultations with your doctor.</string>
+	<string>Bonkano requires access to the Microphone for video consultations with your doctor.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Bonkano Meet utilise votre position pour trouver les centres partenaires les plus proches de vous.</string>
+	<string>Bonkano utilise votre position pour trouver les centres partenaires les plus proches de vous.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Bonkano Meet utilise votre position pour trouver les centres partenaires les plus proches de vous.</string>
+	<string>Bonkano utilise votre position pour trouver les centres partenaires les plus proches de vous.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Bonkano Meet utilise votre position pour trouver les centres les plus proches de vous.</string>
+	<string>Bonkano utilise votre position pour trouver les centres les plus proches de vous.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Bonkano Meet requires access to the photo library to upload your profile photo.</string>
+	<string>Bonkano requires access to the photo library to upload your profile photo.</string>
 	<key>Privacy-Location Usage Description</key>
-	<string>Bonkano Meet requires address permission access to get the current location of the user instead of typing address manually. </string>
+	<string>Bonkano requires address permission access to get the current location of the user instead of typing address manually. </string>
 </dict>
 </plist>

@@ -20,38 +20,23 @@ class DoctorServiceCard extends StatelessWidget {
         children: [
           Text(
             serviceElement.serviceName,
+            maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: boldTextStyle(size: 16),
           ),
           16.height,
-          Row(
-            children: [
-              Text(
-                "${serviceElement.totalAppointments}:",
-                style: secondaryTextStyle(size: 14),
-              ),
-              4.width,
-              Text(
-                "${serviceElement.totalAppointments}",
-                style: primaryTextStyle(),
-              ),
-            ],
-          ),
-          8.height,
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "${serviceElement.clinicName}:",
-                style: secondaryTextStyle(size: 14),
-              ).flexible(),
-              4.width,
-              Text(
-                serviceElement.clinicName.map((e) => e.validate()).toList().join(', '),
-                style: primaryTextStyle(),
-              ).flexible(),
-            ],
-          ),
+          if (serviceElement.clinicName.isNotEmpty)
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(Icons.local_hospital_outlined, size: 18, color: textSecondaryColorGlobal).paddingTop(2),
+                8.width,
+                Text(
+                  serviceElement.clinicName.map((e) => e.validate()).toList().join(', '),
+                  style: secondaryTextStyle(size: 14),
+                ).flexible(),
+              ],
+            ),
         ],
       ),
     );

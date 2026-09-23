@@ -203,7 +203,11 @@ class EditUserProfileScreen extends StatelessWidget {
                                     color: editUserProfileController.selectedGender.value.id == genders[index].id ? appColorPrimary : context.cardColor,
                                   ),
                                   child: Text(
-                                    genders[index].name,
+                                    genders[index].slug?.toLowerCase() == 'male' 
+                                            ? locale.value.male 
+                                            : (genders[index].slug?.toLowerCase() == 'female' 
+                                                ? locale.value.female 
+                                                : genders[index].name),
                                     style: secondaryTextStyle(
                                       color: editUserProfileController.selectedGender.value.id == genders[index].id ? white : null,
                                     ),

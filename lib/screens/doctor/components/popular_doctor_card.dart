@@ -75,13 +75,7 @@ class PopularDoctorCard extends StatelessWidget {
                   ],
                 ),
 
-                10.height,
-                Text(
-                  '${doctorElement.totalAppointmemt} Patient Served',
-                  style: primaryTextStyle(
-                    color: Colors.blue,
-                  ),
-                ),
+
               ],
             ).paddingSymmetric(horizontal: 12, vertical: 12),
           ],

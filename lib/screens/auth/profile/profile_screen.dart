@@ -1,3 +1,9 @@
+import '../../health_space/health_space_screen.dart';
+import '../../Encounter/all_encounters_screen.dart';
+import '../../health_space/medical_documents/medical_document_screen.dart';
+import '../../health_space/medical_documents/medical_document_screen.dart';
+import '../../health_space/health_space_screen.dart';
+import '../../Encounter/all_encounters_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bonkano_meet/configs.dart';
@@ -69,19 +75,58 @@ class ProfileScreen extends StatelessWidget {
                   trailing: trailing,
                   padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
                 ).paddingTop(16),
-                SettingItemWidget(
-                  decoration: boxDecorationDefault(color: context.cardColor),
-                  title: locale.value.otherPatient,
-                  subTitle: locale.value.manageOtherPatient,
-                  splashColor: transparentColor,
-                  onTap: () {
-                    Get.to(() => ManageOtherPatientScreen(), duration: const Duration(milliseconds: 800));
-                  },
-                  titleTextStyle: boldTextStyle(size: 14),
-                  leading: commonLeadingWid(imgPath: Assets.iconsIcUsersThreeprofile).circularLightPrimaryBg(),
-                  trailing: trailing,
-                  padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
-                ).paddingTop(16),
+                  SettingItemWidget(
+                    decoration: boxDecorationDefault(color: context.cardColor),
+                    title: locale.value.otherPatient,
+                    subTitle: locale.value.manageOtherPatient,
+                    splashColor: transparentColor,
+                    onTap: () {
+                      Get.to(() => ManageOtherPatientScreen(), duration: const Duration(milliseconds: 800));
+                    },
+                    titleTextStyle: boldTextStyle(size: 14),
+                    leading: commonLeadingWid(imgPath: Assets.iconsIcUsersThreeprofile).circularLightPrimaryBg(),
+                    trailing: trailing,
+                    padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
+                  ).paddingTop(16),
+                  SettingItemWidget(
+                    decoration: boxDecorationDefault(color: context.cardColor),
+                    title: locale.value.healthSpace,
+                    subTitle: "Allergies, Traitements, etc.",
+                    splashColor: transparentColor,
+                    onTap: () {
+                      Get.to(() => HealthSpaceScreen(), duration: const Duration(milliseconds: 800));
+                    },
+                    titleTextStyle: boldTextStyle(size: 14),
+                    leading: commonLeadingWid(imgPath: Assets.iconsIcHeart).circularLightPrimaryBg(),
+                    trailing: trailing,
+                    padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
+                  ).paddingTop(16),
+                  SettingItemWidget(
+                    decoration: boxDecorationDefault(color: context.cardColor),
+                    title: locale.value.encounters,
+                    subTitle: "Consulter vos actes m\u00e9dicaux",
+                    splashColor: transparentColor,
+                    onTap: () {
+                      Get.to(() => AllEncountersScreen(), duration: const Duration(milliseconds: 800));
+                    },
+                    titleTextStyle: boldTextStyle(size: 14),
+                    leading: commonLeadingWid(imgPath: Assets.iconsIcEncounter).circularLightPrimaryBg(),
+                    trailing: trailing,
+                    padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
+                  ).paddingTop(16),
+                  SettingItemWidget(
+                    decoration: boxDecorationDefault(color: context.cardColor),
+                    title: "Documents m\u00e9dicaux",
+                    subTitle: "Ordonnances, examens et certificats",
+                    splashColor: transparentColor,
+                    onTap: () {
+                      Get.to(() => MedicalDocumentScreen(), duration: const Duration(milliseconds: 800));
+                    },
+                    titleTextStyle: boldTextStyle(size: 14),
+                    leading: commonLeadingWid(imgPath: Assets.iconsIcUploadReport).circularLightPrimaryBg(),
+                    trailing: trailing,
+                    padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
+                  ).paddingTop(16),
                 SettingItemWidget(
                   title: locale.value.settings,
                   decoration: boxDecorationDefault(color: context.cardColor),

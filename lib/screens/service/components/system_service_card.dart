@@ -15,24 +15,51 @@ class SystemServiceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SettingItemWidget(
-      title: systemServiceElement.name,
-      subTitle: '${locale.value.total} ${systemServiceElement.totalServices} ${locale.value.servicesAvailable}',
-      padding: const EdgeInsets.all(16),
-      decoration: boxDecorationDefault(color: context.cardColor, borderRadius: radius(8)),
-      leading: CachedImageWidget(
-        url: systemServiceElement.systemServiceImage,
-        fit: BoxFit.fitHeight,
-        circle: true,
-        height: 60,
-        width: 60,
-      ),
-      trailing: const Icon(Icons.keyboard_arrow_right),
+    return InkWell(
       onTap: () {
         /// Store select system service in global variable
         selectedSysService(systemServiceElement);
         Get.to(() => ServiceListScreen(), arguments: systemServiceElement);
       },
-    ).paddingBottom(16);
+      borderRadius: radius(8),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: boxDecorationDefault(color: context.cardColor, borderRadius: radius(8)),
+        margin: const EdgeInsets.only(bottom: 16),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CachedImageWidget(
+              url: systemServiceElement.systemServiceImage,
+              fit: BoxFit.cover,
+              circle: true,
+              height: 60,
+              width: 60,
+            ),
+            16.width,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    systemServiceElement.name,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: boldTextStyle(),
+                  ),
+                  4.height,
+                  Text(
+                    '${locale.value.total} ${systemServiceElement.totalServices} ${locale.value.servicesAvailable}',
+                    style: secondaryTextStyle(),
+                  ),
+                ],
+              ),
+            ),
+            16.width,
+            Icon(Icons.keyboard_arrow_right, color: textSecondaryColorGlobal),
+          ],
+        ),
+      ),
+    );
   }
 }

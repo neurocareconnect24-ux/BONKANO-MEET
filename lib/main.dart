@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -41,6 +43,9 @@ Rx<BaseLanguage> locale = LanguageEn().obs;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Intl.defaultLocale = 'fr';
+  await initializeDateFormatting('fr', null);
+
   
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform).then((value) {
     // Firebase Messaging & Crashlytics only supported on mobile platforms

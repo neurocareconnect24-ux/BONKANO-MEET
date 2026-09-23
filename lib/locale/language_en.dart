@@ -1,6 +1,14 @@
 import 'languages.dart';
 
 class LanguageEn extends BaseLanguage {
+
+  @override String get medicalDisclaimerTitle => 'Medical Warning';
+  @override String get medicalDisclaimerShort => 'Bonkano does not provide diagnosis or treatment. Always consult a qualified healthcare professional.';
+  @override String get medicalDisclaimerLong => 'Bonkano is a teleconsultation platform that connects you with licensed doctors.\n\nThe app does not itself provide medical advice, diagnosis or treatment, and does not replace a consultation with a healthcare professional.\n\nIn case of a medical emergency, contact your local emergency services immediately (112).';
+  @override String get medicalDisclaimerAccept => 'I have read and understood';
+  @override String get medicalDisclaimerContinue => 'Continue';
+  @override String get medicalDisclaimerNotEmergency => 'Bonkano is not an emergency service.';
+  @override String get emergencyButton => 'Emergency';
   @override
   String get language => 'Language';
 

@@ -20,11 +20,23 @@ class DoctorServicesComponent extends StatelessWidget {
       appBartitleText: locale.value.services,
       appBarVerticalSize: Get.height * 0.12,
       isLoading: doctorDetailCont.isLoading,
-      body: Obx(
-        () => AnimatedListView(
+      body: Obx(() {
+        List<ServiceElement> uniqueServices = [];
+        var seenNames = <String>{};
+        for (var s in doctorDetailCont.doctorData.value.services) {
+          if (!seenNames.contains(s.serviceName)) {
+            uniqueServices.add(s);
+            seenNames.add(s.serviceName);
+          } else {
+            var existing = uniqueServices.firstWhere((e) => e.serviceName == s.serviceName);
+            existing.clinicName = {...existing.clinicName, ...s.clinicName}.toList();
+          }
+        }
+
+        return AnimatedListView(
           shrinkWrap: true,
           padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
-          itemCount: doctorDetailCont.doctorData.value.services.length,
+          itemCount: uniqueServices.length,
           emptyWidget: NoDataWidget(
             title: locale.value.noServicesFoundAtAMoment,
             subTitle: locale.value.looksLikeThereIsNoServicesProvidedByThisDocto,
@@ -37,7 +49,7 @@ class DoctorServicesComponent extends StatelessWidget {
             },
           ).paddingSymmetric(horizontal: 32).paddingBottom(Get.height * 0.1),
           itemBuilder: (context, index) {
-            ServiceElement serviceElement = doctorDetailCont.doctorData.value.services[index];
+            ServiceElement serviceElement = uniqueServices[index];
             return DoctorServiceCard(serviceElement: serviceElement).paddingBottom(16);
           },
           onNextPage: () async {
@@ -50,8 +62,8 @@ class DoctorServicesComponent extends StatelessWidget {
             doctorDetailCont.servicesPage(1);
             return await doctorDetailCont.getServiceList(showLoader: false);
           },
-        ),
-      ),
+        );
+      }),
     );
   }
 }

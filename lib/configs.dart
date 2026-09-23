@@ -2,7 +2,7 @@
 
 import 'package:flutter/foundation.dart';
 
-const APP_NAME = 'Bonkano Meet';
+const APP_NAME = 'Bonkano';
 const APP_LOGO_URL = '$DOMAIN_URL/img/logo/mini_logo.png';
 const DEFAULT_LANGUAGE = 'fr';
 
@@ -15,10 +15,10 @@ const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.ne
 const APP_APPSTORE_URL = '';
 
 const TERMS_CONDITION_URL = 'https://meet.bonkano.fr/page/terms-conditions';
-const PRIVACY_POLICY_URL = 'https://meet.bonkano.fr/page/privacy-policy';
+const PRIVACY_POLICY_URL = 'https://meet.bonkano.fr/page/politique-de-confidentialite';
 const INQUIRY_SUPPORT_EMAIL = 'contact@bonkano.fr';
 
-// TODO: Remplacer par le numéro d'aide réel de Bonkano Meet
+// TODO: Remplacer par le numéro d'aide réel de Bonkano
 const HELP_LINE_NUMBER = '+22901000000';
 
 //region Payment Gateway

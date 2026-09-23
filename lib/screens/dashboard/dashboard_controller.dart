@@ -15,8 +15,8 @@ import '../auth/other/settings_screen.dart';
 import '../auth/profile/profile_controller.dart';
 import '../auth/profile/profile_screen.dart';
 import '../booking/appointments_screen.dart';
-import '../Encounter/all_encounters_screen.dart';
-import '../health_space/health_space_screen.dart';
+import '../chat_ia/chat_ia_screen.dart';
+import '../videos/videos_screen.dart';
 import '../home/home_screen.dart';
 import 'components/menu.dart';
 
@@ -24,15 +24,13 @@ class DashboardController extends GetxController {
   RxInt currentIndex = 0.obs;
   RxBool isLoading = false.obs;
 
-
-
   Rx<BottomBarItem> selectedBottomNav = BottomBarItem(title: (locale.value.home).obs, icon: Assets.navigationIcHomeOutlined, activeIcon: Assets.navigationIcHomeFilled, type: BottomItem.home.name).obs;
 
   RxList<StatelessWidget> screen = [
     HomeScreen(),
     AppointmentsScreen(),
-    AllEncountersScreen(),
-    HealthSpaceScreen(),
+    ChatIAScreen(),
+    VideosScreen(),
   ].obs;
 
   @override
@@ -94,6 +92,17 @@ class DashboardController extends GetxController {
       }
       bottomNavItems.toSet();
     }
+    
+    if (!appConfigs.value.enableChatGpt) {
+      screen.removeWhere((element) => element is ChatIAScreen);
+      bottomNavItems.removeWhere((element) => element.type == BottomItem.chat_ia.name);
+    } else {
+      if (bottomNavItems.indexWhere((element) => element.type == BottomItem.chat_ia.name).isNegative) {
+        screen.insert(2, ChatIAScreen());
+        bottomNavItems.insert(2, BottomBarItem(title: 'Chat IA'.obs, icon: Assets.iconsIcWrite, activeIcon: Assets.iconsIcWrite, type: BottomItem.chat_ia.name));
+      }
+    }
+
     selectedBottomNav(bottomNavItems[currentIndex.value]);
   }
 }
@@ -105,6 +114,10 @@ Future<void> getAppConfigurations() async {
 
     /// Place ChatGPT Key Here
     chatGPTAPIkey = value.chatgptKey;
+    
+    if (Get.isRegistered<DashboardController>()) {
+      Get.find<DashboardController>().reloadBottomTabs();
+    }
   }).onError((error, stackTrace) {
     toast(error.toString());
   });
