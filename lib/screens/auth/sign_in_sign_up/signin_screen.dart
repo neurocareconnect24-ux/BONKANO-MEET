@@ -8,6 +8,7 @@ import '../../../configs.dart';
 import '../../../generated/assets.dart';
 import '../../../main.dart';
 import '../../../utils/constants.dart';
+import '../../../utils/publisher_info.dart';
 import 'sign_in_controller.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/common_base.dart';
@@ -211,6 +212,12 @@ class SignInScreen extends StatelessWidget {
                   ],
                 ),
               ).paddingSymmetric(horizontal: 16),
+              Text(
+                PublisherInfo.publishedBy,
+                textAlign: TextAlign.center,
+                softWrap: true,
+                style: secondaryTextStyle(size: 12),
+              ).paddingSymmetric(horizontal: 24, vertical: 16),
             ],
           ).paddingOnly(top: Get.height * 0.11),
           Positioned(

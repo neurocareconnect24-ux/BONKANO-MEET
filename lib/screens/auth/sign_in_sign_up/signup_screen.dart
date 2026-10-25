@@ -6,6 +6,7 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:bonkano_meet/components/app_logo_widget.dart';
 import 'package:bonkano_meet/utils/constants.dart';
+import 'package:bonkano_meet/utils/publisher_info.dart';
 
 import '../../../components/app_scaffold.dart';
 import '../../../configs.dart';
@@ -203,7 +204,7 @@ class SignUpScreen extends StatelessWidget {
                               8.width,
                               RichTextWidget(
                                 list: [
-                                  TextSpan(text: "${locale.value.iAgreeToThe} ", style: secondaryTextStyle()),
+                                  TextSpan(text: PublisherInfo.consentPrefix, style: secondaryTextStyle()),
                                   TextSpan(
                                     text: locale.value.termsConditions,
                                     style: primaryTextStyle(color: appColorPrimary, size: 12, decoration: TextDecoration.underline, decorationColor: appColorPrimary),
@@ -266,6 +267,12 @@ class SignUpScreen extends StatelessWidget {
                       )),
                 ],
               ).paddingOnly(top: 16),
+              Text(
+                PublisherInfo.publishedBy,
+                textAlign: TextAlign.center,
+                softWrap: true,
+                style: secondaryTextStyle(size: 12),
+              ).paddingSymmetric(horizontal: 24, vertical: 16),
             ],
           ).paddingOnly(top: Get.height * 0.11),
           Positioned(

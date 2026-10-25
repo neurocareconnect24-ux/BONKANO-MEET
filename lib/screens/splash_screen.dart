@@ -6,6 +6,7 @@ import 'package:bonkano_meet/generated/assets.dart';
 import '../components/app_scaffold.dart';
 import '../components/loader_widget.dart';
 import '../utils/colors.dart';
+import '../utils/publisher_info.dart';
 import 'splash_controller.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -23,10 +24,21 @@ class SplashScreen extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.center,
-            child: Image.asset(
-              Assets.assetsAppLogo,
-              height: 150,
-              fit: BoxFit.fitHeight,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset(
+                  Assets.assetsAppLogo,
+                  height: 150,
+                  fit: BoxFit.fitHeight,
+                ),
+                12.height,
+                Text(
+                  PublisherInfo.serviceOf,
+                  textAlign: TextAlign.center,
+                  style: secondaryTextStyle(size: 14),
+                ).paddingSymmetric(horizontal: 24),
+              ],
             ),
           ),
           Positioned(
