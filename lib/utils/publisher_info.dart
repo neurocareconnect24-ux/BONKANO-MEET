@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 /// Les champs laissés vides ('') sont automatiquement masqués dans l'écran « À propos ».
 class PublisherInfo {
   static const String companyName = 'NeuroCare Group';
-  static const String legalForm = 'SARL au capital de 100 000 FCFA';
+  static const String legalForm = 'SARL';
   static const String rccm = 'RB/COT/26 B 43860';
   static const String ifu = ''; // à compléter si souhaité (masqué tant que vide)
   static const String address = 'Ilot C/754, Quartier Suru-Léré, Parcelle Z, Cotonou, Bénin';
