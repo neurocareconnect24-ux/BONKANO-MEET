@@ -68,6 +68,7 @@ class ServiceSelectionCardWidget extends StatelessWidget {
               children: [
                 Text(
                   serviceElement.name,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: boldTextStyle(size: 16),
                 ),

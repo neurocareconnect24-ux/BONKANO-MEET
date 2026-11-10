@@ -7,8 +7,11 @@ import '../../../components/cached_image_widget.dart';
 import '../../../main.dart';
 import '../../../utils/app_common.dart';
 import '../../../utils/colors.dart';
+import '../../../utils/constants.dart';
 import '../../../utils/price_widget.dart';
 import '../../clinic/clinics_list_screen.dart';
+import '../../clinic/model/clinic_detail_model.dart';
+import '../../clinic/model/clinics_res_model.dart';
 import '../../doctor/doctor_list_screen.dart';
 import '../model/service_list_model.dart';
 import '../service_detail_controller.dart';
@@ -89,8 +92,8 @@ class PopularServiceCard extends StatelessWidget {
               children: [
                 Text(
                   serviceElement.name,
-                  style: boldTextStyle(size: 16),
-                  maxLines: 1,
+                  style: boldTextStyle(size: 15),
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
                 6.height,
@@ -162,7 +165,12 @@ class PopularServiceCard extends StatelessWidget {
                       );
                     } else {
                       currentSelectedService(serviceElement);
-                      Get.to(() => ClinicListScreen(), arguments: serviceElement);
+                      if (serviceElement.isVideoConsultancy || serviceElement.type == ServiceTypeConst.online) {
+                        currentSelectedClinic(Clinic(id: AppConstants.virtualClinicId, clinicSession: ClinicSession()));
+                        Get.to(() => DoctorsListScreen(), arguments: AppConstants.virtualClinicId);
+                      } else {
+                        Get.to(() => ClinicListScreen(), arguments: serviceElement);
+                      }
                     }
                   },
                   child: Text(

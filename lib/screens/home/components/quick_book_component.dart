@@ -79,6 +79,7 @@ class QuickBookComponent extends StatelessWidget {
                                       quickBookController.clinicCont.clear();
                                       quickBookController.dateCont.clear();
                                       quickBookController.timeCont.clear();
+                                      quickBookController.getClinicList();
                                       Get.back();
                                     },
                                     child: Container(

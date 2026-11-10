@@ -84,7 +84,7 @@ class ClinicCard extends StatelessWidget {
                       Text(
                         clinicData.name,
                         style: boldTextStyle(),
-                        maxLines: 1,
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ).expand(),
                     ],

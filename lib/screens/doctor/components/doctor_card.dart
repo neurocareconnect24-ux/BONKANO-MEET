@@ -92,8 +92,10 @@ class DoctorCard extends StatelessWidget {
                               Text(
                                 doctorData.fullName,
                                 style: primaryTextStyle(),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
                               ).paddingBottom(6),
-                            if (doctorData.expert.isNotEmpty) Text(doctorData.expert, style: secondaryTextStyle(), maxLines: 1, overflow: TextOverflow.ellipsis),
+                            if (doctorData.expert.isNotEmpty) Text(doctorData.expert, style: secondaryTextStyle(), maxLines: 2, overflow: TextOverflow.ellipsis),
                           ],
                         ).expand(),
                         1.width,

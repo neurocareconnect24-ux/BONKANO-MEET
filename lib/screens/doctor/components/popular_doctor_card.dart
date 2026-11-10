@@ -33,17 +33,25 @@ class PopularDoctorCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      doctorElement.fullName,
-                      style: boldTextStyle(size: 16),
+                    Flexible(
+                      child: Text(
+                        doctorElement.fullName,
+                        style: boldTextStyle(size: 15),
+                        maxLines: 2,
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                     4.width,
-                    Icon(Icons.circle, color: Colors.green, size: 12),
+                    Icon(Icons.circle, color: Colors.green, size: 10),
                   ],
                 ),
                 4.height,
                 Text(
                   doctorElement.expert,
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
                   style: primaryTextStyle(
                     color: Colors.grey,
                     size: 12,

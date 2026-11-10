@@ -107,6 +107,13 @@ class QuickBookController extends GetxController {
     }
     await clinicFuture(CoreServiceApis.getClinics(clinics: clinicList, search: searchClinic.value, serviceId: selectedServiceId.value)).then((value) {
       clinicList(value);
+      if (clinicList.length == 1) {
+        selectedClinicId(clinicList.first.id);
+        selectedClinic(clinicList.first.name);
+        selectedClinicData = clinicList.first;
+        clinicCont.text = clinicList.first.name;
+        getTimeSlot();
+      }
       isLoading(false);
     }).catchError((e) {
       isLoading(false);

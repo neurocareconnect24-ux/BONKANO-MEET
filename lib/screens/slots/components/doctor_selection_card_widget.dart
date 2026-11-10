@@ -47,7 +47,7 @@ class DoctorSelectionCardWidget extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(doctorData.fullName, overflow: TextOverflow.ellipsis, style: boldTextStyle(size: 16)),
+                Text(doctorData.fullName, maxLines: 2, overflow: TextOverflow.ellipsis, style: boldTextStyle(size: 16)),
                 if (doctorData.expert.isNotEmpty)
                   TextIcon(
                     text: doctorData.expert,

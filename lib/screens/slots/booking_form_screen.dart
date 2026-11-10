@@ -1,6 +1,5 @@
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
-import '../../core/legal/medical_disclaimer_banner.dart';
 import 'package:get/get.dart';
 import 'package:bonkano_meet/utils/colors.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -98,35 +97,46 @@ class BookingFormScreen extends StatelessWidget {
                           CommonSelectionWid(
                             title: "${locale.value.clinicName}:",
                             selectedName: timeSlotsCont.clinicNameText.value,
-                            onEdit: () {
-                              if (currentSelectedService.value.id.isNegative && timeSlotsCont.selectedService.value.id.isNegative) {
-                                toast(locale.value.kindlyChooseAServiceFirst);
-                                return;
-                              }
-                              timeSlotsCont.clinicPage(1);
-                              timeSlotsCont.getClinicList();
-                              serviceCommonBottomSheet(
-                                context,
-                                child: BottomSelectionSheet(
-                                  title: locale.value.chooseClinic,
-                                  hintText: locale.value.searchForClinic,
-                                  hasError: timeSlotsCont.hasErrorFetchingClinic.value,
-                                  isEmpty: !timeSlotsCont.isLoading.value && timeSlotsCont.clinicList.isEmpty,
-                                  errorText: timeSlotsCont.errorMessageClinic.value,
-                                  noDataTitle: locale.value.clinicListIsEmpty,
-                                  noDataSubTitle: locale.value.thereAreNoClinicsListedAtTheMomentStayTunedFo,
-                                  isLoading: timeSlotsCont.isLoading,
-                                  searchApiCall: (p0) {
-                                    timeSlotsCont.getClinicList(searchText: p0);
-                                  },
-                                  onRetry: () {
+                            isAutoAssigned: (timeSlotsCont.clinicList.length == 1 && !timeSlotsCont.selectedClinic.value.id.isNegative) ||
+                                (timeSlotsCont.selectedService.value.isVideoConsultancy ||
+                                    timeSlotsCont.selectedService.value.type == ServiceTypeConst.online ||
+                                    currentSelectedService.value.isVideoConsultancy ||
+                                    currentSelectedService.value.type == ServiceTypeConst.online),
+                            onEdit: ((timeSlotsCont.clinicList.length == 1 && !timeSlotsCont.selectedClinic.value.id.isNegative) ||
+                                    (timeSlotsCont.selectedService.value.isVideoConsultancy ||
+                                        timeSlotsCont.selectedService.value.type == ServiceTypeConst.online ||
+                                        currentSelectedService.value.isVideoConsultancy ||
+                                        currentSelectedService.value.type == ServiceTypeConst.online))
+                                ? null
+                                : () {
+                                    if (currentSelectedService.value.id.isNegative && timeSlotsCont.selectedService.value.id.isNegative) {
+                                      toast(locale.value.kindlyChooseAServiceFirst);
+                                      return;
+                                    }
                                     timeSlotsCont.clinicPage(1);
                                     timeSlotsCont.getClinicList();
+                                    serviceCommonBottomSheet(
+                                      context,
+                                      child: BottomSelectionSheet(
+                                        title: locale.value.chooseClinic,
+                                        hintText: locale.value.searchForClinic,
+                                        hasError: timeSlotsCont.hasErrorFetchingClinic.value,
+                                        isEmpty: !timeSlotsCont.isLoading.value && timeSlotsCont.clinicList.isEmpty,
+                                        errorText: timeSlotsCont.errorMessageClinic.value,
+                                        noDataTitle: locale.value.clinicListIsEmpty,
+                                        noDataSubTitle: locale.value.thereAreNoClinicsListedAtTheMomentStayTunedFo,
+                                        isLoading: timeSlotsCont.isLoading,
+                                        searchApiCall: (p0) {
+                                          timeSlotsCont.getClinicList(searchText: p0);
+                                        },
+                                        onRetry: () {
+                                          timeSlotsCont.clinicPage(1);
+                                          timeSlotsCont.getClinicList();
+                                        },
+                                        listWidget: Obx(() => clinicListWid(timeSlotsCont.clinicList).expand()),
+                                      ),
+                                    );
                                   },
-                                  listWidget: Obx(() => clinicListWid(timeSlotsCont.clinicList).expand()),
-                                ),
-                              );
-                            },
                           ),
                           commonDivider.paddingSymmetric(vertical: 16),
                           CommonSelectionWid(
@@ -137,8 +147,17 @@ class BookingFormScreen extends StatelessWidget {
                                 //
                               } else {
                                 if (timeSlotsCont.selectedClinic.value.id.isNegative) {
-                                  toast(locale.value.kindlyChooseAClinicFirst);
-                                  return;
+                                  if (timeSlotsCont.clinicList.length == 1) {
+                                    timeSlotsCont.selectedClinic(timeSlotsCont.clinicList.first);
+                                    timeSlotsCont.clinicNameText(timeSlotsCont.clinicList.first.name);
+                                    currentSelectedClinic(timeSlotsCont.clinicList.first);
+                                  } else if (!currentSelectedClinic.value.id.isNegative) {
+                                    timeSlotsCont.selectedClinic(currentSelectedClinic.value);
+                                    timeSlotsCont.clinicNameText(currentSelectedClinic.value.name);
+                                  } else {
+                                    toast(locale.value.kindlyChooseAClinicFirst);
+                                    return;
+                                  }
                                 }
                                 timeSlotsCont.doctorPage(1);
                                 timeSlotsCont.getDoctorList();

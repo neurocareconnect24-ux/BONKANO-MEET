@@ -80,14 +80,20 @@ class ServiceDetailScreen extends StatelessWidget {
                             Text(
                               serviceDetailController.serviceData.value.name,
                               style: boldTextStyle(size: 16),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                             ),
                             8.height,
                             Row(
                               children: [
                                 Text('${locale.value.category} : ', style: secondaryTextStyle()),
-                                Text(
-                                  serviceDetailController.serviceData.value.categoryName,
-                                  style: boldTextStyle(size: 14, color: appColorSecondary),
+                                Expanded(
+                                  child: Text(
+                                    serviceDetailController.serviceData.value.categoryName,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: boldTextStyle(size: 14, color: appColorSecondary),
+                                  ),
                                 ),
                               ],
                             ),
@@ -200,7 +206,11 @@ class ServiceDetailScreen extends StatelessWidget {
                   /// Store select service in global variable
                   currentSelectedService(serviceDetailController.serviceData.value);
 
-                  if (!currentSelectedClinic.value.id.isNegative) {
+                  if (serviceDetailController.serviceData.value.isVideoConsultancy ||
+                      serviceDetailController.serviceData.value.type == ServiceTypeConst.online) {
+                    currentSelectedClinic(Clinic(id: AppConstants.virtualClinicId, clinicSession: ClinicSession()));
+                    Get.to(() => DoctorsListScreen(), arguments: AppConstants.virtualClinicId);
+                  } else if (!currentSelectedClinic.value.id.isNegative) {
                     Get.to(() => DoctorsListScreen(), arguments: currentSelectedClinic.value.id);
                   } else {
                     Get.to(() => ClinicListScreen(), arguments: serviceDetailController.serviceData.value);

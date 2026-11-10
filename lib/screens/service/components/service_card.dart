@@ -8,8 +8,11 @@ import '../../../components/app_custom_dialog.dart';
 import '../../../generated/assets.dart';
 import '../../../main.dart';
 import '../../../utils/app_common.dart';
+import '../../../utils/constants.dart';
 import '../../../utils/price_widget.dart';
 import '../../clinic/clinics_list_screen.dart';
+import '../../clinic/model/clinic_detail_model.dart';
+import '../../clinic/model/clinics_res_model.dart';
 import '../../doctor/doctor_list_screen.dart';
 import '../model/service_list_model.dart';
 import '../service_detail_controller.dart';
@@ -78,9 +81,10 @@ class ServiceCard extends StatelessWidget {
                   children: [
                     Text(
                       serviceElement.name,
-                      maxLines: 1,
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: boldTextStyle(size: 16),
+                      textAlign: TextAlign.center,
+                      style: boldTextStyle(size: 15),
                     ).flexible(),
                   ],
                 ),
@@ -139,7 +143,12 @@ class ServiceCard extends StatelessWidget {
                     } else {
                       /// Store select service in global variable
                       currentSelectedService(serviceElement);
-                      Get.to(() => ClinicListScreen(), arguments: serviceElement);
+                      if (serviceElement.isVideoConsultancy || serviceElement.type == ServiceTypeConst.online) {
+                        currentSelectedClinic(Clinic(id: AppConstants.virtualClinicId, clinicSession: ClinicSession()));
+                        Get.to(() => DoctorsListScreen(), arguments: AppConstants.virtualClinicId);
+                      } else {
+                        Get.to(() => ClinicListScreen(), arguments: serviceElement);
+                      }
                     }
                   },
                   child: Text(locale.value.bookNow, style: boldTextStyle(size: 12, color: whiteTextColor, weight: FontWeight.w400)),

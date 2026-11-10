@@ -34,7 +34,7 @@ class ClinicSelectionCardWidget extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(clinicData.name, overflow: TextOverflow.ellipsis, style: boldTextStyle(size: 16)),
+                Text(clinicData.name, maxLines: 2, overflow: TextOverflow.ellipsis, style: boldTextStyle(size: 16)),
                 if (clinicData.address.isNotEmpty)
                   TextIcon(
                     text: clinicData.address,

@@ -38,7 +38,7 @@ class ClinicListScreen extends StatelessWidget {
           ViewAllLabel(
             label: "${locale.value.availableClinicsFor} ${clinicListCont.service.value.name}",
             isShowAll: false,
-            maxLines: 1,
+            maxLines: 2,
             expandedText: true,
             textOverflow: TextOverflow.ellipsis,
           ).paddingSymmetric(horizontal: 22),

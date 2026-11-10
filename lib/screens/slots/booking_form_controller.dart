@@ -158,6 +158,28 @@ class BookingFormController extends GetxController {
     ).then((value) {
       isLoading(false);
       hasErrorFetchingClinic(false);
+      if (clinicList.length == 1) {
+        selectedClinic(clinicList.first);
+        clinicNameText(clinicList.first.name);
+        currentSelectedClinic(clinicList.first);
+        getDoctorList();
+      } else if (clinicList.any((element) => element.id == AppConstants.virtualClinicId) &&
+          (selectedService.value.isVideoConsultancy ||
+              selectedService.value.type == ServiceTypeConst.online ||
+              currentSelectedService.value.isVideoConsultancy ||
+              currentSelectedService.value.type == ServiceTypeConst.online)) {
+        final virtualClinic = clinicList.firstWhere((element) => element.id == AppConstants.virtualClinicId);
+        selectedClinic(virtualClinic);
+        clinicNameText(virtualClinic.name);
+        currentSelectedClinic(virtualClinic);
+        getDoctorList();
+      } else if (selectedClinic.value.id > 0 && clinicNameText.value.isEmpty) {
+        if (clinicList.any((element) => element.id == selectedClinic.value.id)) {
+          final match = clinicList.firstWhere((element) => element.id == selectedClinic.value.id);
+          selectedClinic(match);
+          clinicNameText(match.name);
+        }
+      }
     }).onError((error, stackTrace) {
       hasErrorFetchingClinic(true);
       errorMessageClinic(error.toString());

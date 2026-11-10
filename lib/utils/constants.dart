@@ -17,6 +17,7 @@ class Constants {
   static const DECIMAL_POINT = 2;
   static const int virtualClinicId = 6; // ID de la clinique "Centre de téléconsultation Bonkano"
 }
+typedef AppConstants = Constants;
 //endregion
 
 //region DateFormats

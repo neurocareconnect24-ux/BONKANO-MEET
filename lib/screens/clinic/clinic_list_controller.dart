@@ -5,8 +5,9 @@ import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:stream_transform/stream_transform.dart';
 import 'package:bonkano_meet/api/core_apis.dart';
+import '../../utils/app_common.dart';
+import '../doctor/doctor_list_screen.dart';
 import '../service/model/service_list_model.dart';
-import '../../utils/constants.dart';
 import 'model/clinic_detail_model.dart';
 import 'model/clinics_res_model.dart';
 
@@ -72,7 +73,11 @@ class ClinicListController extends GetxController {
         },
       ),
     ).then((value) {
-      log('value.length ==> ${value?.length}');
+      log('value.length ==> ${value.length}');
+      if (clinics.length == 1 && Get.arguments is ServiceElement) {
+        currentSelectedClinic(clinics.first);
+        Get.off(() => DoctorsListScreen(), arguments: clinics.first.id);
+      }
     }).catchError((e) {
       isLoading(false);
       log("getClinics error $e");
