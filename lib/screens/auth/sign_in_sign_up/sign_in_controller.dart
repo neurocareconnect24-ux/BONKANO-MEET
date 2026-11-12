@@ -103,7 +103,8 @@ class SignInController extends GetxController {
 
   googleSignIn() async {
     isLoading(true);
-    await GoogleSignInAuthService.signInWithGoogle().then((value) async {
+    try {
+      final value = await GoogleSignInAuthService.signInWithGoogle();
       Map request = {
         UserKeys.contactNumber: value.mobile,
         UserKeys.email: value.email,
@@ -116,24 +117,23 @@ class SignInController extends GetxController {
       };
       log('signInWithGoogle REQUEST: $request');
 
-      /// Social Login Api
-      await AuthServiceApis.loginUser(request: request, isSocialLogin: true).then((value) async {
-        handleLoginResponse(loginResponse: value, isSocialLogin: true);
-      }).catchError((e) {
-        isLoading(false);
-        log('SignIn Error: $e');
-      toast(locale.value.somethingWentWrong, print: true);
-      });
-    }).catchError((e) {
+      final loginResponse = await AuthServiceApis.loginUser(request: request, isSocialLogin: true);
+      handleLoginResponse(loginResponse: loginResponse, isSocialLogin: true);
+    } catch (e) {
       isLoading(false);
-      log('SignIn Error: $e');
+      log('Google SignIn Error: $e');
+      final errorStr = e.toString().toLowerCase();
+      if (errorStr.contains('cancel') || errorStr.contains('annulé') || errorStr.contains(locale.value.userCancelled.toLowerCase())) {
+        return;
+      }
       toast(locale.value.somethingWentWrong, print: true);
-    });
+    }
   }
 
   appleSignIn() async {
     isLoading(true);
-    await GoogleSignInAuthService.signInWithApple().then((value) async {
+    try {
+      final value = await GoogleSignInAuthService.signInWithApple();
       Map request = {
         UserKeys.contactNumber: value.mobile,
         UserKeys.email: value.email,
@@ -144,21 +144,19 @@ class SignInController extends GetxController {
         UserKeys.userType: LoginTypeConst.LOGIN_TYPE_USER,
         UserKeys.loginType: LoginTypeConst.LOGIN_TYPE_APPLE,
       };
-      log('signInWithGoogle REQUEST: $request');
+      log('signInWithApple REQUEST: $request');
 
-      /// Social Login Api
-      await AuthServiceApis.loginUser(request: request, isSocialLogin: true).then((value) async {
-        handleLoginResponse(loginResponse: value, isSocialLogin: true);
-      }).catchError((e) {
-        isLoading(false);
-        log('SignIn Error: $e');
-      toast(locale.value.somethingWentWrong, print: true);
-      });
-    }).catchError((e) {
+      final loginResponse = await AuthServiceApis.loginUser(request: request, isSocialLogin: true);
+      handleLoginResponse(loginResponse: loginResponse, isSocialLogin: true);
+    } catch (e) {
       isLoading(false);
-      log('SignIn Error: $e');
+      log('Apple SignIn Error: $e');
+      final errorStr = e.toString().toLowerCase();
+      if (errorStr.contains('cancel') || errorStr.contains('annulé') || errorStr.contains(locale.value.userCancelled.toLowerCase())) {
+        return;
+      }
       toast(locale.value.somethingWentWrong, print: true);
-    });
+    }
   }
 
   void handleLoginResponse({required UserResponse loginResponse, bool isSocialLogin = false}) {

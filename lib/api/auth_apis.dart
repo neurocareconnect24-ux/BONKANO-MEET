@@ -21,11 +21,35 @@ import '../utils/push_notification_service.dart';
 
 class AuthServiceApis {
   static Future<UserResponse> createUser({required Map request}) async {
-    return UserResponse.fromJson(await handleResponse(await buildHttpResponse(APIEndPoints.register, request: request, method: HttpMethodType.POST)));
+    try {
+      return UserResponse.fromJson(await handleResponse(await buildHttpResponse(APIEndPoints.register, request: request, method: HttpMethodType.POST)));
+    } catch (e) {
+      log('createUser failed ($e), checking if user was created in DB...');
+      try {
+        await Future.delayed(const Duration(milliseconds: 500));
+        Map loginReq = {
+          UserKeys.email: request[UserKeys.email],
+          UserKeys.password: request[UserKeys.password],
+          UserKeys.userType: request[UserKeys.userType] ?? LoginTypeConst.LOGIN_TYPE_USER,
+        };
+        return await loginUser(request: loginReq, isSocialLogin: false);
+      } catch (_) {
+        rethrow;
+      }
+    }
   }
 
   static Future<UserResponse> loginUser({required Map request, bool isSocialLogin = false}) async {
-    return UserResponse.fromJson(await handleResponse(await buildHttpResponse(isSocialLogin ? APIEndPoints.socialLogin : APIEndPoints.login, request: request, method: HttpMethodType.POST)));
+    try {
+      return UserResponse.fromJson(await handleResponse(await buildHttpResponse(isSocialLogin ? APIEndPoints.socialLogin : APIEndPoints.login, request: request, method: HttpMethodType.POST)));
+    } catch (e) {
+      if (isSocialLogin) {
+        log('Social login initial call failed ($e), retrying after 600ms...');
+        await Future.delayed(const Duration(milliseconds: 600));
+        return UserResponse.fromJson(await handleResponse(await buildHttpResponse(APIEndPoints.socialLogin, request: request, method: HttpMethodType.POST)));
+      }
+      rethrow;
+    }
   }
 
   static Future<ChangePassRes> changePasswordAPI({required Map request}) async {
@@ -67,7 +91,6 @@ class AuthServiceApis {
     log("---------------- clear data---------------");
     GoogleSignIn().signOut();
     await PushNotificationService().unsubscribeFirebaseTopic();
-
     if (isFromDeleteAcc) {
       localStorage.erase();
       isLoggedIn(false);
