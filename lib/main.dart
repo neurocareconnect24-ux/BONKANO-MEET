@@ -47,23 +47,42 @@ void main() async {
   await initializeDateFormatting('fr', null);
 
   
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform).then((value) {
-    // Firebase Messaging & Crashlytics only supported on mobile platforms
-    if (isFCMSupported) {
-      FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-      PushNotificationService().setupFirebaseMessaging();
-    }
-    if (kReleaseMode) {
-      try {
-        FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-      } catch (e) {
-        log('Crashlytics not available on this platform: $e');
+  try {
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform).then((value) {
+      // Firebase Messaging & Crashlytics only supported on mobile platforms
+      if (isFCMSupported) {
+        FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+        PushNotificationService().setupFirebaseMessaging();
       }
-    }
-  }).catchError(onError);
+      if (kReleaseMode && (Platform.isAndroid || Platform.isIOS)) {
+        try {
+          FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+        } catch (e) {
+          log('Crashlytics not available on this platform: $e');
+        }
+      }
+    });
+  } catch (e) {
+    log('Firebase init error on this platform: $e');
+  }
 
-  await GetStorage.init();
-  await NotificationService().init();
+  try {
+    if (!kIsWeb && Platform.isWindows) {
+      String path = '${Directory.current.path}\\storage';
+      Directory(path).createSync(recursive: true);
+      await GetStorage('GetStorage', path).initStorage;
+    } else {
+      await GetStorage.init();
+    }
+  } catch (e) {
+    log('GetStorage init error: $e');
+  }
+
+  try {
+    await NotificationService().init();
+  } catch (e) {
+    log('NotificationService init error: $e');
+  }
   //
   fontFamilyPrimaryGlobal = GoogleFonts.interTight(fontWeight: FontWeight.w500).fontFamily;
   textPrimarySizeGlobal = 14;
@@ -98,7 +117,16 @@ void main() async {
   } catch (e) {
     log('getThemeFromLocal from cache E: $e');
   }
+  HttpOverrides.global = MyHttpOverrides();
   runApp(const MyApp());
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+  }
 }
 
 
@@ -129,7 +157,9 @@ class MyApp extends StatelessWidget {
           themeMode: isDarkMode.value ? ThemeMode.dark : ThemeMode.light,
           initialBinding: BindingsBuilder(() {
             //initialBinding logic
-            setStatusBarColor(transparentColor);
+            if (!kIsWeb && !Platform.isWindows) {
+              setStatusBarColor(transparentColor);
+            }
           }),
           home: SplashScreen(),
         ),
